@@ -1,0 +1,402 @@
+* {
+	margin: 0;
+	padding: 0;
+	box-sizing: border-box;
+}
+
+body {
+	font-family: 'Georgia', 'Times New Roman', serif;
+	line-height: 1.6;
+	color: #333;
+	background-color: #f8f6f3;
+}
+
+/* Header and Navigation */
+header {
+	background-color: #2c1810;
+	color: white;
+	padding: 1rem 0;
+	position: sticky;
+	top: 0;
+	z-index: 1000;
+	box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+nav {
+	max-width: 1200px;
+	margin: 0 auto;
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+	padding: 0 2rem;
+}
+
+.logo {
+	font-size: 1.8rem;
+	font-weight: bold;
+	color: #d4af37;
+}
+
+.nav-links {
+	display: flex;
+	list-style: none;
+	gap: 2rem;
+}
+
+.nav-links a {
+	color: white;
+	text-decoration: none;
+	transition: color 0.3s;
+	position: relative;
+}
+
+.nav-links a:hover {
+	color: #d4af37;
+}
+
+/* Dropdown Styling */
+.dropdown-content {
+  display: none;
+  position: absolute;
+  top: 100%;
+  left: 620px;
+  margin-top:-25px;
+  background-color: #fdf6e3;
+  min-width: 160px;
+  box-shadow: 0px 8px 16px rgba(0,0,0,0.2);
+
+
+}
+
+.dropdown-content a {
+  padding: 10px 15px;
+  text-align: left;
+  color: #4b3b2b;
+  display: flex;
+  
+}
+
+.dropdown-content a:hover {
+  background-color: #e8dbc6;
+}
+
+/* Show on Hover */
+.dropdown:hover .dropdown-content {
+  display: block;
+}
+
+
+
+.search-container {
+	display: flex;
+	align-items: center;
+	gap: 1rem;
+}
+
+.search-box {
+	padding: 0.5rem;
+	border: none;
+	border-radius: 4px;
+	width: 200px;
+}
+
+.auth-buttons {
+	display: flex;
+	gap: 1rem;
+}
+
+.btn {
+	padding: 0.5rem 1rem;
+	border: none;
+	border-radius: 4px;
+	cursor: pointer;
+	text-decoration: none;
+	transition: background-color 0.3s;
+}
+
+.btn-primary {
+	background-color: #d4af37;
+	color: #2c1810;
+}
+
+.btn-secondary {
+	background-color: transparent;
+	color: white;
+	border: 1px solid #d4af37;
+}
+
+.btn:hover {
+	opacity: 0.8;
+}
+
+/* Hero Slider */
+.hero-slider {
+	position: relative;
+	height: 400px;
+	overflow: hidden;
+	margin-bottom: 3rem;
+}
+
+.slide {
+	position: absolute;
+	top: 0;
+	left: 0;
+	width: 100%;
+	height: 100%;
+	background: linear-gradient(135deg, #8b4513, #d4af37);
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	opacity: 0;
+	transition: opacity 1s ease-in-out;
+}
+
+.slide.active {
+	opacity: 1;
+}
+
+.slide-content {
+	text-align: center;
+	color: white;
+	max-width: 600px;
+	padding: 2rem;
+}
+
+.slide h2 {
+	font-size: 2.5rem;
+	margin-bottom: 1rem;
+}
+
+.slide p {
+	font-size: 1.2rem;
+	margin-bottom: 2rem;
+}
+
+/* Main Content */
+main {
+	max-width: 1200px;
+	margin: 0 auto;
+	padding: 0 2rem;
+}
+
+.section {
+	margin-bottom: 3rem;
+}
+
+.section-header {
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+	margin-bottom: 2rem;
+	border-bottom: 2px solid #d4af37;
+	padding-bottom: 0.5rem;
+}
+
+.section h2 {
+	font-size: 2rem;
+	color: #2c1810;
+}
+
+.show-more {
+	color: #8b4513;
+	text-decoration: none;
+	font-weight: bold;
+	transition: color 0.3s;
+}
+
+.show-more:hover {
+	color: #d4af37;
+}
+
+.books-grid {
+	display: grid;
+	grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+	gap: 2rem;
+}
+
+.book-card {
+	background: white;
+	border-radius: 8px;
+	padding: 1.5rem;
+	box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+	transition: transform 0.3s, box-shadow 0.3s;
+	text-align: center;
+}
+
+.book-card:hover {
+	transform: translateY(-5px);
+	box-shadow: 0 8px 15px rgba(0, 0, 0, 0.2);
+}
+
+.book-cover {
+	width: 150px;
+	height: 200px;
+	background: linear-gradient(45deg, #8b4513, #d4af37);
+	margin: 0 auto 1rem;
+	border-radius: 4px;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	color: white;
+	font-weight: bold;
+}
+
+.book-title {
+	font-size: 1.1rem;
+	font-weight: bold;
+	margin-bottom: 0.5rem;
+	color: #2c1810;
+}
+
+.book-author {
+	color: #666;
+	margin-bottom: 0.5rem;
+}
+
+.book-price {
+	font-size: 1.2rem;
+	font-weight: bold;
+	color: #8b4513;
+	margin-bottom: 1rem;
+}
+
+.read-btn {
+	background-color: #8b4513;
+	color: white;
+	padding: 0.5rem 1.5rem;
+	border: none;
+	border-radius: 4px;
+	cursor: pointer;
+	transition: background-color 0.3s;
+	width: 100%;
+}
+
+.read-btn:hover {
+	background-color: #2c1810;
+}
+
+/* Footer */
+footer {
+	background-color: #2c1810;
+	color: white;
+	padding: 3rem 0 1rem;
+	margin-top: 4rem;
+}
+
+.footer-content {
+	max-width: 1200px;
+	margin: 0 auto;
+	padding: 0 2rem;
+	display: grid;
+	grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+	gap: 2rem;
+}
+
+.footer-section h3 {
+	color: #d4af37;
+	margin-bottom: 1rem;
+}
+
+.footer-section p, .footer-section a {
+	color: #ccc;
+	text-decoration: none;
+	margin-bottom: 0.5rem;
+	display: block;
+}
+
+.footer-section a:hover {
+	color: #d4af37;
+}
+
+.footer-bottom {
+	text-align: center;
+	padding-top: 2rem;
+	border-top: 1px solid #444;
+	margin-top: 2rem;
+	color: #999;
+}
+
+/* Mobile Menu */
+.mobile-menu {
+	display: none;
+	flex-direction: column;
+	position: absolute;
+	top: 100%;
+	left: 0;
+	width: 100%;
+	background-color: #2c1810;
+	padding: 1rem;
+}
+
+.hamburger {
+	display: none;
+	flex-direction: column;
+	cursor: pointer;
+}
+
+.hamburger span {
+	width: 25px;
+	height: 3px;
+	background-color: white;
+	margin: 3px 0;
+	transition: 0.3s;
+}
+
+/* Responsive Design */
+@media ( max-width : 768px) {
+	.nav-links {
+		display: none;
+	}
+	.hamburger {
+		display: flex;
+	}
+	.search-container {
+		flex-direction: column;
+		gap: 0.5rem;
+	}
+	.search-box {
+		width: 150px;
+	}
+	.auth-buttons {
+		flex-direction: column;
+		gap: 0.5rem;
+	}
+	.slide h2 {
+		font-size: 1.8rem;
+	}
+	.slide p {
+		font-size: 1rem;
+	}
+	.books-grid {
+		grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+		gap: 1rem;
+	}
+	.section-header {
+		flex-direction: column;
+		align-items: flex-start;
+		gap: 1rem;
+	}
+	nav {
+		flex-wrap: wrap;
+		gap: 1rem;
+	}
+}
+
+@media ( max-width : 480px) {
+	.hero-slider {
+		height: 300px;
+	}
+	.books-grid {
+		grid-template-columns: 1fr;
+	}
+	.book-cover {
+		width: 120px;
+		height: 160px;
+	}
+	nav {
+		padding: 0 1rem;
+	}
+	main {
+		padding: 0 1rem;
+	}
+}

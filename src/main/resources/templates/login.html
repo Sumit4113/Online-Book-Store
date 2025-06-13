@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Login - BookZone</title>
+<style>
+body {
+	font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+	background: #e0f7fa;
+	margin: 0;
+	padding: 0;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	height: 100vh;
+}
+
+.login-box {
+	background: white;
+	padding: 30px 40px;
+	border-radius: 10px;
+	box-shadow: 0 5px 15px rgb(0 0 0/ 0.2);
+	width: 320px;
+	text-align: center;
+}
+
+h2 {
+	margin-bottom: 25px;
+	color: #00796b;
+}
+
+input[type="text"], input[type="password"] {
+	width: 100%;
+	padding: 12px 10px;
+	margin: 10px 0 20px 0;
+	border: 1px solid #00796b;
+	border-radius: 5px;
+	font-size: 1rem;
+}
+
+button {
+	background-color: #00796b;
+	color: white;
+	border: none;
+	padding: 12px 20px;
+	border-radius: 5px;
+	font-size: 1rem;
+	cursor: pointer;
+	width: 100%;
+	margin-bottom: 15px;
+}
+
+button:hover {
+	background-color: #004d40;
+}
+
+.register-link {
+	color: #00796b;
+	text-decoration: none;
+	font-weight: 600;
+}
+
+.register-link:hover {
+	text-decoration: underline;
+}
+</style>
+</head>
+<body>
+
+	<div class="login-box">
+		<h2>Login to BookZone</h2>
+		<form action="/login" method="post">
+			<input type="text" name="username" placeholder="Username" required />
+			<input type="password" name="password" placeholder="Password"
+				required />
+			<button type="submit">Login</button>
+		</form>
+		<p>
+			Don't have an account? <a th:href="@{/register}"
+				class="register-link">Register here</a>
+		</p>
+	</div>
+
+</body>
+</html>

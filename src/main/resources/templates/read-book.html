@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<title th:text="${book.title} + ' - Read Book'">Read Book</title>
+<link rel="stylesheet" th:href="@{/css/style.css}">
+<style>
+body {
+	font-family: 'Segoe UI', sans-serif;
+	margin: 0;
+	background-color: #f9f9f9;
+}
+
+.read-container {
+	max-width: 1000px;
+	margin: 40px auto;
+	padding: 20px;
+	background-color: #fff;
+	box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+	border-radius: 10px;
+}
+
+.book-title {
+	font-size: 2rem;
+	margin-bottom: 10px;
+	color: #333;
+}
+
+.book-author {
+	color: #777;
+	font-size: 1.1rem;
+	margin-bottom: 20px;
+}
+
+iframe {
+	width: 100%;
+	height: 600px;
+	border: 1px solid #ccc;
+	border-radius: 8px;
+}
+
+.back-btn {
+	margin-top: 20px;
+	display: inline-block;
+	padding: 10px 20px;
+	background-color: #3498db;
+	color: white;
+	border-radius: 5px;
+	text-decoration: none;
+	transition: background 0.3s ease;
+}
+
+.back-btn:hover {
+	background-color: #2980b9;
+}
+</style>
+</head>
+<body>
+
+	<div class="read-container">
+		<h1 class="book-title" th:text="${book.title}">Book Title</h1>
+		<p class="book-author" th:text="'by ' + ${book.author}">Author
+			Name</p>
+
+		<iframe th:src="@{'/books/pdf/' + ${book.id}}" allowfullscreen></iframe>
+
+		<a href="/" class="back-btn">← Back to Home</a>
+	</div>
+
+</body>
+</html>

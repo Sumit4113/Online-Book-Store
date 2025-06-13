@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<title>Edit Book</title>
+<link
+	href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap"
+	rel="stylesheet">
+<style>
+body {
+	font-family: 'Roboto', sans-serif;
+	background: linear-gradient(120deg, #a1c4fd, #c2e9fb);
+	margin: 0;
+	padding: 0;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	height: 100vh;
+}
+
+.form-card {
+	background-color: white;
+	border-radius: 15px;
+	box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
+	padding: 30px 40px;
+	width: 500px;
+	max-width: 95%;
+}
+
+h2 {
+	text-align: center;
+	margin-bottom: 25px;
+	color: #333;
+}
+
+label {
+	display: block;
+	margin-bottom: 5px;
+	font-weight: bold;
+	color: #555;
+}
+
+input[type="text"], input[type="date"], input[type="file"], textarea {
+	width: 100%;
+	padding: 10px 12px;
+	margin-bottom: 15px;
+	border: 1px solid #ccc;
+	border-radius: 8px;
+	font-size: 14px;
+}
+
+textarea {
+	resize: vertical;
+	min-height: 80px;
+}
+
+button {
+	width: 100%;
+	padding: 12px;
+	font-size: 16px;
+	background-color: #007bff;
+	color: white;
+	border: none;
+	border-radius: 8px;
+	cursor: pointer;
+	transition: background-color 0.3s ease;
+}
+
+button:hover {
+	background-color: #0062cc;
+}
+
+.form-group {
+	margin-bottom: 15px;
+}
+
+.back-link {
+	text-align: center;
+	margin-top: 15px;
+}
+
+.back-link a {
+	text-decoration: none;
+	color: #007bff;
+	font-weight: bold;
+}
+
+.back-link a:hover {
+	color: #004999;
+}
+</style>
+</head>
+<body>
+	<div class="form-card">
+		<h2>✏️ Edit Book</h2>
+
+		<form th:action="@{/book/edit/{id}(id=${book.id})}"
+			th:object="${book}" method="post" enctype="multipart/form-data">
+			<div class="form-group">
+				<label>Title</label> <input type="text" th:field="*{title}" required />
+			</div>
+
+			<div class="form-group">
+				<label>Author</label> <input type="text" th:field="*{author}"
+					required />
+			</div>
+
+			<div class="form-group">
+				<label>ISBN</label> <input type="text" th:field="*{isbn}" />
+			</div>
+
+			<div class="form-group">
+				<label>Category</label> <input type="text" th:field="*{category}" />
+			</div>
+
+
+
+			<div class="form-group">
+				<label>Description</label>
+				<textarea th:field="*{description}"></textarea>
+			</div>
+
+			<div class="form-group">
+				<label>Update Book Image (optional)</label> <input type="file"
+					name="imageFile" accept="image/*" />
+			</div>
+
+			<div class="form-group">
+				<label>Update Book PDF (optional)</label> <input type="file"
+					name="pdfFile" accept="application/pdf" />
+			</div>
+
+			<button type="submit">🔄 Update Book</button>
+		</form>
+
+		<div class="back-link">
+			<a th:href="@{/book}">← Back to Book List</a>
+		</div>
+	</div>
+</body>
+</html>
