@@ -1,8 +1,6 @@
 // config/SecurityConfig.java
 package com.base.configure;
 
-import com.base.configure.CustomUserDetailsService;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.*;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.dao.DaoAuthenticationProvider;
@@ -11,13 +9,9 @@ import org.springframework.security.config.annotation.web.builders.*;
 import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
-import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 
 @Configuration
 public class SecurityConfig {
-
-	@Autowired
-	private JwtAuthenticationFilter jwtFilter;
 
 	@Bean
 	public CustomUserDetailsService customUserDetailsService() {
@@ -42,19 +36,29 @@ public class SecurityConfig {
 		return config.getAuthenticationManager();
 	}
 
-	@Bean
-	public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
-		http.csrf(csrf -> csrf.disable());
+    @Bean
+    public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
+        http.csrf(csrf -> csrf.disable())
+            .authorizeHttpRequests(auth -> auth            
+                .requestMatchers("/book/**").permitAll()
+                .requestMatchers("/books/pdf/{id}").hasRole("USER")
+                .requestMatchers("/**").permitAll()
+                .anyRequest().authenticated()
+            )
+          
+          
+            .formLogin(form -> form
+                .loginPage("/login")
+                .loginProcessingUrl("/dologin")
+                .defaultSuccessUrl("/books/pdf/{id}", true)
+                .permitAll()
+            )
+            .logout(logout -> logout
+                .logoutUrl("/logout")
+                .logoutSuccessUrl("/loginform?logout")
+                .permitAll()
+            );
 
-		http.authenticationProvider(authProvider());
-
-		http.sessionManagement(session -> session.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
-				.authorizeHttpRequests(auth -> auth.requestMatchers("/auth/**").permitAll() // public login/register
-						.requestMatchers("/books/pdf/**").permitAll().requestMatchers("/admin/**").hasRole("ADMIN")
-						.requestMatchers("/user/**").hasAnyRole("USER", "ADMIN").anyRequest().authenticated());
-
-		http.addFilterBefore(jwtFilter, UsernamePasswordAuthenticationFilter.class);
-
-		return http.build();
-	}
+        return http.build();
+    }
 }

@@ -10,7 +10,7 @@
 <body>
 
 	<!-- Header -->
-	<header>
+	<header id="home">
 		<nav>
 			<div class="logo">BookHaven</div>
 			<ul class="nav-links">
@@ -65,42 +65,55 @@
 				<h2>Join Our Reading Community</h2>
 				<p>Connect with fellow book lovers, share reviews, and discover
 					recommendations</p>
-				<a href="#community" class="btn btn-primary">Join Now</a>
+				<a th:href="@{/PremiumUser/primeum}" class="btn btn-primary">Join
+					Now</a>
 			</div>
 		</div>
 	</section>
 
 	<!-- Main Content -->
-	<main>
-		<div th:each="category : ${categories}">
-			<section class="section"
-				th:attr="id=${#strings.replace(category.toLowerCase(), ' ', '-')}">
-				<div class="section-header">
-					<h2 th:text="${category}">Category</h2>
-					<a href="#" class="show-more">Show More →</a>
-				</div>
-				<div class="books-grid">
-					<div class="book-card" th:each="book : ${books}"
-						th:if="${book.category.trim().equalsIgnoreCase(category)}">
-
-						<div class="book-cover">
-							<img th:src="@{'/book/image/' + ${book.id}}" alt="Book Cover" />
-						</div>
-
-						<div class="book-title" th:text="${book.title}">Book Title</div>
-						<div class="book-author" th:text="'by ' + ${book.author}">Author</div>
-						<a th:href="@{'/books/pdf/' + ${book.id}}" target="_blank"
-							class="read-btn">Read Now</a>
-
+	<section id="main">
+		<main>
+			<div th:each="category : ${categories}">
+				<section class="section"
+					th:attr="id=${#strings.replace(category.toLowerCase(), ' ', '-')}">
+					<div class="section-header">
+						<h2 th:text="${category}">Category</h2>
+						<a th:href="@{'/category/' + ${category}}" class="show-more">Show
+							More →</a>
 					</div>
-				</div>
-			</section>
-		</div>
-	</main>
-	
+					<div class="books-grid">
+						<div class="book-card" th:each="book : ${books}"
+							th:if="${book.category.trim().equalsIgnoreCase(category)}">
+
+							<div class="book-cover">
+								<img th:src="@{'/image/' + ${book.id}}" alt="Book Cover" />
+
+							</div>
+							<button class="bookmark" onclick="toggleBookmark(this)">♡</button>
+
+							<div class="book-title" th:text="${book.title}">Book Title</div>
+							<div class="book-author" th:text="'by ' + ${book.author}">Author</div>
+							<p class="book-price">$12.99</p>
+							<div class="book-actions">
+							<a th:href="@{'/books/pdf/' + ${book.id}}" target="_blank"
+								class="read-btn">Read Now</a> <a
+								th:href="@{/PremiumUser/PaymentUser}" class="read-btn">Buy
+								Now</a>
+								</div>
+
+
+
+						</div>
+					</div>
+				</section>
+			</div>
+		</main>
+	</section>
+
 	<!-- About Section   -->
 
-	<section class="about-section">
+	<section class="about-section" id="about">
 		<h1>About Us</h1>
 		<p>Welcome to OnlineBookStore – your digital haven for books of
 			all genres! Whether you're a fan of fantasy, philosophy, mystery, or
@@ -159,19 +172,19 @@
 			<div class="footer-section">
 				<h3>Customer Service</h3>
 				<a href="#help">Help Center</a> <a href="#returns">Returns &
-					Refunds</a> <a href="#shipping">Shipping Info</a> <a href="#faq">FAQ</a>
+					Refunds</a> <a href="#shipping">Shipping Info</a>
 			</div>
 			<div class="footer-section">
 				<h3>Contact Us</h3>
-				<p>📧 support@bookhaven.com</p>
-				<p>📞 1-800-BOOKS-NOW</p>
-				<p>📍 123 Literary Lane, Book City, BC 12345</p>
+				<p>📧 jdsumit01@gmail.com</p>
+				<p>📞 +91 6264720046</p>
+				<p>📍 Indore, Madhya Pradesh</p>
 				<p>🕒 Mon-Fri: 9AM-6PM EST</p>
 			</div>
 		</div>
 		<div class="footer-bottom">
-			<p>&copy; 2024 BookHaven. All rights reserved. | Privacy Policy |
-				Terms of Service</p>
+			<p>&copy; 2025 BooksStore. All rights reserved. | Privacy Policy
+				| Terms of Service</p>
 		</div>
 	</footer>
 
@@ -215,6 +228,16 @@
                 }
             });
         });
+        // Bookmark functionality
+        function toggleBookmark(button) {
+            if (button.classList.contains('bookmarked')) {
+                button.classList.remove('bookmarked');
+                button.innerHTML = '♡';
+            } else {
+                button.classList.add('bookmarked');
+                button.innerHTML = '♥';
+            }
+        }
     </script>
 
 </body>

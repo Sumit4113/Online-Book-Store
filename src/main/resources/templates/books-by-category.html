@@ -6,95 +6,93 @@
 <title th:text="'Books in ' + ${category}">Books</title>
 </head>
 <body>
-<style>
+	<style>
 /* Classic Bookish Style with Serif font and warm colors */
-
 body {
-  font-family: "Georgia", serif;
-  background-color: #fdf6e3;  /* warm parchment paper tone */
-  color: #4b3b2b;             /* dark brown text */
-  margin: 20px;
+	font-family: "Georgia", serif;
+	background-color: #fdf6e3; /* warm parchment paper tone */
+	color: #4b3b2b; /* dark brown text */
+	margin: 20px;
 }
 
 h2 {
-  font-size: 2.5rem;
-  margin-bottom: 30px;
-  text-align: center;
-  color: #5a4b3a;
-  text-shadow: 1px 1px 1px #e6d8b8;
+	font-size: 2.5rem;
+	margin-bottom: 30px;
+	text-align: center;
+	color: #5a4b3a;
+	text-shadow: 1px 1px 1px #e6d8b8;
 }
 
 .book-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
-  gap: 25px;
-  padding: 0 20px;
+	display: grid;
+	grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+	gap: 25px;
+	padding: 0 20px;
 }
 
 .book-card {
-  background-color: #f7f1df; /* lighter parchment */
-  border: 1.5px solid #c7b895;
-  border-radius: 8px;
-  box-shadow: 3px 3px 6px rgba(75, 59, 43, 0.3);
-  padding: 15px;
-  text-align: center;
-  transition: transform 0.3s ease, box-shadow 0.3s ease;
+	background-color: #f7f1df; /* lighter parchment */
+	border: 1.5px solid #c7b895;
+	border-radius: 15px;
+	box-shadow: 3px 3px 6px rgba(75, 59, 43, 0.3);
+	padding: 15px;
+	text-align: center;
+	transition: transform 0.3s ease, box-shadow 0.3s ease;
 }
 
 .book-card:hover {
-  transform: translateY(-8px);
-  box-shadow: 5px 8px 15px rgba(75, 59, 43, 0.6);
+	transform: translateY(-8px);
+	box-shadow: 5px 8px 15px rgba(75, 59, 43, 0.6);
 }
 
 .book-card img {
-  max-width: 100%;
-  height: 280px;
-  object-fit: cover;
-  border-radius: 4px;
-  margin-bottom: 15px;
-  box-shadow: 2px 2px 6px rgba(75, 59, 43, 0.2);
+	width: 200px;
+	height: 200px;
+	object-fit: cover;
+	border-radius: 4px;
+	margin-bottom: 15px;
+	box-shadow: 2px 2px 6px rgba(75, 59, 43, 0.2);
 }
 
 .book-card h3 {
-  font-size: 1.25rem;
-  margin-bottom: 8px;
-  font-weight: bold;
-  color: #6a5742;
+	font-size: 1.25rem;
+	margin-bottom: 8px;
+	font-weight: bold;
+	color: #6a5742;
 }
 
 .book-card p {
-  font-size: 1rem;
-  margin-bottom: 15px;
-  font-style: italic;
-  color: #7a6a52;
+	font-size: 1rem;
+	margin-bottom: 15px;
+	font-style: italic;
+	color: #7a6a52;
 }
 
 .book-card a {
-  text-decoration: none;
-  background-color: #a68a56;  /* classic leather brown */
-  color: #fdf6e3;
-  padding: 8px 18px;
-  border-radius: 20px;
-  font-weight: 600;
-  box-shadow: 1px 1px 3px rgba(0,0,0,0.3);
-  transition: background-color 0.3s ease;
-  display: inline-block;
+	text-decoration: none;
+	background-color: #a68a56; /* classic leather brown */
+	color: #fdf6e3;
+	padding: 8px 18px;
+	border-radius: 20px;
+	font-weight: 600;
+	box-shadow: 1px 1px 3px rgba(0, 0, 0, 0.3);
+	transition: background-color 0.3s ease;
+	display: inline-block;
 }
 
 .book-card a:hover {
-  background-color: #8c7440;
+	background-color: #8c7440;
 }
-
 </style>
 	<h2 th:text="'Books in ' + ${category}">Books</h2>
 
 	<div class="book-grid">
 		<div th:each="book : ${books}" class="book-card">
-			<img th:src="@{'/images/' + ${book.image}}" alt="Book Image" />
+			<img th:src="@{'/image/' + ${book.id}}" alt="Book Cover" />
 			<h3 th:text="${book.title}"></h3>
 			<p th:text="${book.author}"></p>
 			<a th:href="@{'/books/pdf/' + ${book.id}}" target="_blank"
-							class="read-btn">Read Now</a>
+				class="read-btn">Read Now</a>
 		</div>
 	</div>
 </body>

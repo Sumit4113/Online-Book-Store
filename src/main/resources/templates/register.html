@@ -74,12 +74,13 @@ button:hover {
 			<input type="text" name="username" placeholder="Username"
 				th:field="*{username}" required /> <input type="text"
 				name="username" placeholder="email" th:field="*{email}" required />
+
 			<input type="password" name="password" placeholder="Password"
 				th:field="*{password}" required />
 			<button type="submit">Register</button>
 		</form>
 		<p>
-			Already have an account? <a  th:href="@{/login}" class="login-link">Login
+			Already have an account? <a th:href="@{/login}" class="login-link">Login
 				here</a>
 		</p>
 	</div>
