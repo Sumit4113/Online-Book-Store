@@ -1,16 +1,20 @@
 package com.base.entity;
 
 import java.util.ArrayList;
+
 import java.util.List;
 
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Entity;
+import jakarta.persistence.FetchType;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.OneToMany;
+import jakarta.persistence.Table;
 
 @Entity
+@Table(name = "app_user") // Avoid using 'user' as table name in PostgreSQL
 public class User {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -19,12 +23,11 @@ public class User {
 	private String password;
 	private String email;
 	private String role;
-	
-	@OneToMany(mappedBy = "user", cascade = CascadeType.ALL)
+	private String imageUrl;
+
+	@OneToMany(cascade = CascadeType.ALL, mappedBy = "user", orphanRemoval = true, fetch = FetchType.EAGER)
 	private List<ContactAddress> addresses = new ArrayList<>();
 
-
-	
 	/**
 	 * @return the addresses
 	 */
@@ -37,6 +40,21 @@ public class User {
 	 */
 	public void setAddresses(List<ContactAddress> addresses) {
 		this.addresses = addresses;
+	}
+
+	
+	/**
+	 * @return the imageUrl
+	 */
+	public String getImageUrl() {
+		return imageUrl;
+	}
+
+	/**
+	 * @param imageUrl the imageUrl to set
+	 */
+	public void setImageUrl(String imageUrl) {
+		this.imageUrl = imageUrl;
 	}
 
 	/**

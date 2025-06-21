@@ -14,6 +14,7 @@ public class ContactAddress {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int cid;
+	
 	private String streetAddress;
 	private String city;
 	private String state;

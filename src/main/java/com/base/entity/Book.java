@@ -35,13 +35,10 @@ public class Book {
 		this.category = category;
 	}
 
-	// Store image bytes in DB
-	@Lob
-	private byte[] image;
+	
+	private String imageUrl;
 
-	// Store PDF bytes in DB
-	@Lob
-	private byte[] pdf;
+	private String pdfUrl;
 
 	// Getters and setters
 
@@ -85,21 +82,37 @@ public class Book {
 		this.description = description;
 	}
 
-	public byte[] getImage() {
-		return image;
+
+
+	/**
+	 * @return the imageUrl
+	 */
+	public String getImageUrl() {
+		return imageUrl;
 	}
 
-	public void setImage(byte[] image) {
-		this.image = image;
+	/**
+	 * @param imageUrl the imageUrl to set
+	 */
+	public void setImageUrl(String imageUrl) {
+		this.imageUrl = imageUrl;
 	}
 
-	public byte[] getPdf() {
-		return pdf;
+	/**
+	 * @return the pdfUrl
+	 */
+	public String getPdfUrl() {
+		return pdfUrl;
 	}
 
-	public void setPdf(byte[] pdf) {
-		this.pdf = pdf;
+	/**
+	 * @param pdfUrl the pdfUrl to set
+	 */
+	public void setPdfUrl(String pdfUrl) {
+		this.pdfUrl = pdfUrl;
 	}
+
+	
 
 	// Optionally, override toString(), hashCode(), equals() if needed
 

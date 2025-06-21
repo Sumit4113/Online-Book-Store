@@ -15,7 +15,7 @@
 			<div class="logo">BookHaven</div>
 			<ul class="nav-links">
 				<li><a href="#home">Home</a></li>
-				<li><a href="#about">About</a></li>
+				<li><a th:href="@{/aboutpage}">About</a></li>
 				<li class="dropdown"><a href="#genres">Genres</a>
 					<div class="dropdown-content">
 						<a th:each="category : ${category}"
@@ -45,19 +45,12 @@
 	<!-- Hero Slider -->
 	<section class="hero-slider">
 		<div class="slide active">
+
 			<div class="slide-content">
 				<h2>Discover Your Next Great Read</h2>
 				<p>Explore thousands of books across all genres and find your
 					perfect literary companion</p>
 				<a href="#books" class="btn btn-primary">Browse Books</a>
-			</div>
-		</div>
-		<div class="slide">
-			<div class="slide-content">
-				<h2>New Releases Every Week</h2>
-				<p>Stay updated with the latest bestsellers and trending titles
-					from your favorite authors</p>
-				<a href="#new" class="btn btn-primary">View New Releases</a>
 			</div>
 		</div>
 		<div class="slide">
@@ -70,6 +63,7 @@
 			</div>
 		</div>
 	</section>
+
 
 	<!-- Main Content -->
 	<section id="main">
@@ -87,7 +81,8 @@
 							th:if="${book.category.trim().equalsIgnoreCase(category)}">
 
 							<div class="book-cover">
-								<img th:src="@{'/image/' + ${book.id}}" alt="Book Cover" />
+								<img th:src="${book.imageUrl}" alt="Book Cover" />
+
 
 							</div>
 							<button class="bookmark" onclick="toggleBookmark(this)">♡</button>
@@ -96,11 +91,10 @@
 							<div class="book-author" th:text="'by ' + ${book.author}">Author</div>
 							<p class="book-price">$12.99</p>
 							<div class="book-actions">
-							<a th:href="@{'/books/pdf/' + ${book.id}}" target="_blank"
-								class="read-btn">Read Now</a> <a
-								th:href="@{/PremiumUser/PaymentUser}" class="read-btn">Buy
-								Now</a>
-								</div>
+								<a th:src="${book.pdfUrl}" target="_blank" class="read-btn">Read
+									Now</a> <a th:href="@{/PremiumUser/PaymentUser}" class="read-btn">Buy
+									Now</a>
+							</div>
 
 
 
@@ -110,49 +104,6 @@
 			</div>
 		</main>
 	</section>
-
-	<!-- About Section   -->
-
-	<section class="about-section" id="about">
-		<h1>About Us</h1>
-		<p>Welcome to OnlineBookStore – your digital haven for books of
-			all genres! Whether you're a fan of fantasy, philosophy, mystery, or
-			self-help, we've got something for everyone. We believe in making
-			knowledge accessible and enjoyable for all readers.</p>
-		<img
-			src="https://images.unsplash.com/photo-1512820790803-83ca734da794"
-			alt="Bookshelf" class="about-image" />
-	</section>
-
-	<section class="team-section">
-		<h2>Meet the Team</h2>
-		<div class="team-cards">
-
-			<div class="team-card">
-				<img src="https://randomuser.me/api/portraits/men/32.jpg"
-					alt="John Doe">
-				<h3>John Doe</h3>
-				<p>Founder & Backend Developer</p>
-			</div>
-
-			<div class="team-card">
-				<img src="https://randomuser.me/api/portraits/women/44.jpg"
-					alt="Jane Smith">
-				<h3>Jane Smith</h3>
-				<p>Frontend Designer</p>
-			</div>
-
-			<div class="team-card">
-				<img src="https://randomuser.me/api/portraits/men/64.jpg"
-					alt="Sam Lee">
-				<h3>Sam Lee</h3>
-				<p>Content Curator</p>
-			</div>
-
-		</div>
-	</section>
-
-
 
 	<!-- Footer -->
 	<footer>

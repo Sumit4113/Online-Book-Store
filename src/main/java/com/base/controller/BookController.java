@@ -7,15 +7,22 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
+import java.io.IOException;
 import java.security.Principal;
 
 import com.base.entity.Book;
-
+import com.base.repository.BookRepository;
 import com.base.service.BookService;
+import com.base.service.CloudiService;
 
 @Controller
 @RequestMapping("/book")
 public class BookController {
+	@Autowired
+	private CloudiService cloudinaryService;
+
+	@Autowired
+	private BookRepository bookRepository;
 
 	@Autowired
 	private BookService bookService;
@@ -42,14 +49,25 @@ public class BookController {
 	public String addBook(@ModelAttribute Book book, @RequestParam("imageFile") MultipartFile imageFile,
 			@RequestParam("pdfFile") MultipartFile pdfFile) {
 		try {
-			book.setImage(imageFile.getBytes());
-			book.setPdf(pdfFile.getBytes());
+			// Upload image to Cloudinary (resource_type: image)
+			if (!imageFile.isEmpty()) {
+				String imageUrl = cloudinaryService.uploadImage(imageFile);
+				book.setImageUrl(imageUrl); // ✅ Save image URL in DB
+			}
 
-			bookService.saveBookWithFiles(book, imageFile, pdfFile);
-		} catch (Exception e) {
+			// Upload PDF to Cloudinary (resource_type: raw)
+			if (pdfFile != null && !pdfFile.isEmpty()) {
+				String pdfUrl = cloudinaryService.uploadPdf(pdfFile);
+				book.setPdfUrl(pdfUrl); // ✅ Save PDF URL in DB
+			}
+
+			bookRepository.save(book); // Save to MySQL (only URLs, not files)
+
+		} catch (IOException e) {
 			e.printStackTrace();
-			// Optionally add error handling and show error message
+			throw new RuntimeException("Failed to save files");
 		}
+
 		return "redirect:/book/show";
 	}
 

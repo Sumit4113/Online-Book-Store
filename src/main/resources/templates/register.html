@@ -7,7 +7,7 @@
 <style>
 body {
 	font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-	background: #fff3e0;
+	background: #e0f7fa;
 	margin: 0;
 	padding: 0;
 	display: flex;
@@ -27,20 +27,20 @@ body {
 
 h2 {
 	margin-bottom: 25px;
-	color: #e65100;
+	color: #00796b;
 }
 
 input[type="text"], input[type="password"] {
 	width: 100%;
 	padding: 12px 10px;
 	margin: 10px 0 20px 0;
-	border: 1px solid #e65100;
+	border: 1px solid #00796b;
 	border-radius: 5px;
 	font-size: 1rem;
 }
 
 button {
-	background-color: #e65100;
+	background-color: #00796b;
 	color: white;
 	border: none;
 	padding: 12px 20px;
@@ -52,11 +52,11 @@ button {
 }
 
 button:hover {
-	background-color: #bf360c;
+	background-color: #004d40;
 }
 
 .login-link {
-	color: #e65100;
+	color: #00796b;
 	text-decoration: none;
 	font-weight: 600;
 }
@@ -64,12 +64,38 @@ button:hover {
 .login-link:hover {
 	text-decoration: underline;
 }
+
+.alert {
+	margin-bottom: 1rem;
+	padding: 0.8rem;
+	border-radius: 4px;
+	text-align: center;
+	font-weight: bold;
+}
+
+.alert-success {
+	background-color: #c6f6d5;
+	color: #22543d;
+	border: 1px solid #38a169;
+}
+
+.alert-error {
+	background-color: #fed7d7;
+	color: #822727;
+	border: 1px solid #e53e3e;
+}
 </style>
 </head>
 <body>
 
 	<div class="register-box">
 		<h2>Create an Account</h2>
+
+		<!-- Alerts -->
+		<div th:if="${success}" class="alert alert-success"
+			th:text="${success}"></div>
+		<div th:if="${error}" class="alert alert-error" th:text="${error}"></div>
+
 		<form th:action="@{/register}" method="post" th:object="${user}">
 			<input type="text" name="username" placeholder="Username"
 				th:field="*{username}" required /> <input type="text"

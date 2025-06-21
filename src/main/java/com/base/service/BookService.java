@@ -1,6 +1,7 @@
 package com.base.service;
 
 import java.io.IOException;
+
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -32,22 +33,19 @@ public class BookService {
 	 * Save a book with image and PDF file uploads. Store the actual file bytes
 	 * inside the Book entity.
 	 */
-	public Book saveBookWithFiles(Book book, MultipartFile imageFile, MultipartFile pdfFile) {
-		try {
-			if (imageFile != null && !imageFile.isEmpty()) {
-				book.setImage(imageFile.getBytes()); // Store image bytes in DB
-			}
-
-			if (pdfFile != null && !pdfFile.isEmpty()) {
-				book.setPdf(pdfFile.getBytes()); // Store PDF bytes in DB
-			}
-
-			return bookRepository.save(book);
-		} catch (IOException e) {
-			e.printStackTrace();
-			throw new RuntimeException("Failed to save files");
-		}
-	}
+//	public Book saveBookWithFiles(Book book, MultipartFile pdfFile) {
+//		try {
+//
+//			if (pdfFile != null && !pdfFile.isEmpty()) {
+//				book.setPdf(pdfFile.getBytes()); // Store PDF bytes in DB
+//			}
+//
+//			return bookRepository.save(book);
+//		} catch (IOException e) {
+//			e.printStackTrace();
+//			throw new RuntimeException("Failed to save files");
+//		}
+//	}
 
 	public Book updateBook(Long id, Book updatedBook) {
 		Book book = getBookById(id);
@@ -82,5 +80,3 @@ public class BookService {
 		return bookRepository.findByCategoryIgnoreCase(category);
 	}
 }
-
-
