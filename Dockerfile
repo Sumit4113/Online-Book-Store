@@ -1,14 +1,12 @@
-# Use official OpenJDK image
-FROM eclipse-temurin:17-jdk-alpine
-
-# Set working directory
+# 🔨 Stage 1: Build the project using Maven
+FROM maven:3.9.6-eclipse-temurin-17 AS build
 WORKDIR /app
+COPY . .
+RUN mvn clean package -DskipTests
 
-# Copy JAR file (update filename to your actual JAR)
-COPY target/OnlineBookStore-1.0.jar app.jar
-
-# Expose port (must match your Spring Boot server.port)
+# 🚀 Stage 2: Run the Spring Boot app
+FROM eclipse-temurin:17-jdk-alpine
+WORKDIR /app
+COPY --from=build /app/target/OnlineBookStore-1.0.jar app.jar
 EXPOSE 8080
-
-# Run the app
 ENTRYPOINT ["java", "-jar", "app.jar"]
